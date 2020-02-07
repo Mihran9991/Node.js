@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%=title %></title>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <h1><%=title %></h1>
+    <form action="<%= action %>" method="post">
+      <%if (fields.length) { %> <% for(let i = 0; i < fields.length; i++) {%>
+      <label><%= fields[i].name %></label>
+      <input
+        type="<%= fields[i].type %>"
+        name="<%= fields[i].name %>"
+        required="<% if (fields[i].property) { %> <%= fields[i].property %> <% } %>"
+        style="display: block;"
+      />
+      <% } %> <% } %>
+
+      <button type="submit"><%= submitBtnValue %></button>
+    </form>
+  </body>
+</html>
