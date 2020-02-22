@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%=title %></title>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <form id="my-form" method="post" action="/todo">
+      <div class="form-field">
+        <input
+          class="input"
+          id="title"
+          name="title"
+          type="text"
+          value=""
+          required
+        />
+      </div>
+      <div class="form-actions">
+        <button type="submit">Create</button>
+      </div>
+    </form>
+
+    <% if (todos.length) { %>
+    <h1><%=title %></h1>
+    <ul>
+      <% for(let i = 0; i < todos.length; ++i) { %>
+      <li>
+        <%= todos[i][1].title %>
+        <div class="actions" style="display:inline">
+          <button
+            onclick="window.location.replace('edit/?id=<%= todos[i][0] %>')"
+          >
+            Edit
+          </button>
+          <button onclick="">Delete</button>
+        </div>
+      </li>
+      <% } %>
+    </ul>
+    <% } %>
+  </body>
+</html>

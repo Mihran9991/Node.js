@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%=title %></title>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <input
+      class="input"
+      id="title"
+      name="title"
+      type="text"
+      value=""
+      required
+    />
+    <button id="edit">Save</button>
+    <script>
+      function getQueryVariable(variable) {
+        const query = window.location.search.substring(1);
+        const vars = query.split("&");
+
+        for (let i = 0; i < vars.length; ++i) {
+          const pair = vars[i].split("=");
+          if (pair[0] === variable) {
+            return pair[1];
+          }
+        }
+
+        return false;
+      }
+
+      const id = getQueryVariable("id");
+
+      console.log(id);
+      const saveTodoItem = <%- save %>;
+
+      console.log(saveTodoItem);
+        const btn = document
+            .getElementById("edit")
+            .addEventListener("click", () => {
+                saveTodoItem()
+                    .then(() => {
+                      console.log("asdas");
+                    })
+                    .catch((err) => {
+
+                      console.log("err" ,err);
+                    });
+            });
+    </script>
+  </body>
+</html>
