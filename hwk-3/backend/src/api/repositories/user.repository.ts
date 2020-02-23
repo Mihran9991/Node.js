@@ -1,11 +1,27 @@
+import { Query } from "mongoose";
+
 import { IRepository } from "../../@types/repository";
-// import userModel from "../models/user.model";
+import UserModel, { IUser } from "../models/user.model";
 
-export default class UserRepository implements IRepository<any> {
-  private model: any = {};
+export default class UserRepository implements IRepository<IUser> {
+  public create(user: IUser): Promise<IUser> {
+    return new UserModel(user).save();
+  }
 
-  public create(arg: any): Promise<any> {}
-  public update(arg: any): Promise<void> {}
-  public delete(arg: any): Promise<any> {}
-  public getById(id: string): Promise<any> {}
+  public update(user: IUser): Query<any> {
+    const { _id } = user;
+    return UserModel.updateOne({ _id }, user);
+  }
+
+  public delete(_id: string): Query<any> {
+    return UserModel.deleteOne({ _id });
+  }
+
+  public getById(_id: string): Query<any> {
+    return UserModel.findById(_id);
+  }
+
+  public getEmployeeList(): Query<any> {
+    return UserModel.find();
+  }
 }

@@ -8,6 +8,6 @@ export default class ExpressLoader implements ILoader {
   public load(app: express.Application) {
     app.use(morgan("combined"));
     app.use(express.json());
-    app.use("/", new IndexRouter().getExpressRouter());
+    app.use("/", new IndexRouter().getCollectedRoutes());
   }
 }

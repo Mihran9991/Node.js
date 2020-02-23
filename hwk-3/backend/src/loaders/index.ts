@@ -19,9 +19,9 @@ export default class IndexLoader implements IIndexLoader {
   public initalizeAllLoadersSync(): void {
     fs.readdirSync(__dirname)
       .filter(l => l.indexOf(".loader") > -1)
-      .forEach(loaderName => {
+      .forEach(async loaderName => {
         const Loader = require(path.resolve(__dirname, loaderName)).default;
-        new Loader().load(this.app);
+        await new Loader().load(this.app);
       });
   }
 }
