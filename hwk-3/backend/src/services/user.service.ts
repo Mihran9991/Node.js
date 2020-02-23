@@ -1,7 +1,7 @@
-export default class UserService {
-  private userRepository: any;
 
-  constructor(repository: any) {
-    this.userRepository = repository;
-  }
+import UserRepository from '../api/repositories/user.repository';
+
+export default class UserService {
+    private userRepository: any = new UserRepository();
 }
+
