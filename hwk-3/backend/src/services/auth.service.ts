@@ -31,7 +31,9 @@ export default class AuthService {
 
     const token = jwt.sign(
       {
-        data: user
+        data: {
+          _id: user.id
+        }
       },
       config.auth.jwt_secret,
       { expiresIn: "1h" }

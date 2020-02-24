@@ -23,7 +23,13 @@ export default class UserController extends BaseController {
   public edit = async (req: express.Request, res: express.Response) => {
     try {
       const { body: userData } = req;
-      const queryResponse = await this.userService.update(userData);
+      // const { _id, role } = req.user;
+
+      // if (this.isEmployee(role) && _id !== userData._id) {
+      //   return this.forbidden(res);
+      // }
+
+      const queryResponse = await this.userService.edit(userData);
       return this.ok(res, queryResponse);
     } catch (e) {
       return this.fail(res, 400, e);

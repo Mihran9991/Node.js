@@ -13,7 +13,10 @@ export default class UserRouter implements IRouter {
         path: this.baseUrl,
         action: this.controller.create,
         method: "post",
-        middlewares: [JWTMiddleware.verify, UserMiddleware.checkRolePermissions]
+        middlewares: [
+          JWTMiddleware.verify,
+          UserMiddleware.checkPermissionsByRole
+        ]
       },
       {
         path: this.baseUrl,
@@ -25,13 +28,19 @@ export default class UserRouter implements IRouter {
         path: `${this.baseUrl}/list`,
         action: this.controller.getEmployeeList,
         method: "get",
-        middlewares: [JWTMiddleware.verify, UserMiddleware.checkRolePermissions]
+        middlewares: [
+          JWTMiddleware.verify,
+          UserMiddleware.checkPermissionsByRole
+        ]
       },
       {
         path: this.baseUrl,
         action: this.controller.remove,
         method: "delete",
-        middlewares: [JWTMiddleware.verify, UserMiddleware.checkRolePermissions]
+        middlewares: [
+          JWTMiddleware.verify,
+          UserMiddleware.checkPermissionsByRole
+        ]
       }
     ];
   }

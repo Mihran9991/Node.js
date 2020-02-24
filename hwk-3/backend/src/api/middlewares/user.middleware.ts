@@ -7,14 +7,13 @@ class UserMiddleware {
     return role === ROLES.Admin;
   }
 
-  public checkRolePermissions = async (
+  public checkPermissionsByRole = async (
     req: Request,
     res: Response,
     next: NextFunction
   ) => {
     const { role } = req.user;
 
-    console.log(req.user);
     if (!this.isAdmin(role)) {
       return res
         .status(403)
