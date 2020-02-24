@@ -1,7 +1,7 @@
 import { Response } from "express";
 
 import { IBaseController } from "../../@types/controller";
-import { roles } from "../../constants/user.constant";
+import { ROLES } from "../../constants/user.constant";
 
 export default class BaseController implements IBaseController {
   public ok(res: Response, data?: any): void {
@@ -24,19 +24,15 @@ export default class BaseController implements IBaseController {
   public notFound(res: Response, { message }: any) {
     res.status(404).send(message);
   }
-  public clientError(res: Response, { message }: any) {
-    res.status(400).send(message);
-  }
-
-  public serverError(res: Response, { message }: any) {
-    res.status(500).send(message);
+  public fail(res: Response, code: number = 400, { message }: any) {
+    res.status(code).send(message);
   }
 
   public isAdmin(role: number): boolean {
-    return role === roles.Admin;
+    return role === ROLES.Admin;
   }
 
   public isEmployee(role: number): boolean {
-    return role === roles.Employee;
+    return role === ROLES.Employee;
   }
 }

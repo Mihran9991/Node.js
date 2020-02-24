@@ -6,4 +6,5 @@ export interface IRepository<T> {
   create(t: T): Promise<any>;
   update(t: T): Query<any>;
   getEmployeeList(): Query<any>;
+  findByFields(fieldsObj: Object): Query<any>;
 }

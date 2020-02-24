@@ -18,7 +18,7 @@ export default class ${file_name_prefix^}Controller extends BaseController {
       // ...
       this.ok(res);
     } catch (e) {
-      this.clientError(res, e);
+      this.fail(res, 400, e);
     }
   }
 }

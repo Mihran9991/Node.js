@@ -17,9 +17,11 @@ export default class IndexRouter implements IIndexRouter {
       .forEach(ruterName => {
         const Router = require(path.resolve(__dirname, ruterName)).default;
         const routerCollection = new Router().getCollection();
-        routerCollection.forEach(({ path, action, method }: RouterObj) => {
-          this.router[method](path, action);
-        });
+        routerCollection.forEach(
+          ({ path, action, method, middlewares = [] }: RouterObj) => {
+            this.router[method](path, middlewares, action);
+          }
+        );
       });
   }
 

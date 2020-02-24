@@ -1,5 +1,7 @@
 import { IRouter, RouterObj } from "../../@types/router";
 import UserController from "../controllers/user.controller";
+import UserMiddleware from "../middlewares/user.middleware";
+import JWTMiddleware from "../middlewares/jwt.middleware";
 
 export default class UserRouter implements IRouter {
   private baseUrl: string = "/user";
@@ -10,22 +12,26 @@ export default class UserRouter implements IRouter {
       {
         path: this.baseUrl,
         action: this.controller.create,
-        method: "get"
+        method: "post",
+        middlewares: [JWTMiddleware.verify, UserMiddleware.checkRolePermissions]
       },
       {
         path: this.baseUrl,
         action: this.controller.edit,
-        method: "put"
+        method: "put",
+        middlewares: [JWTMiddleware.verify]
       },
       {
         path: `${this.baseUrl}/list`,
         action: this.controller.getEmployeeList,
-        method: "get"
+        method: "get",
+        middlewares: [JWTMiddleware.verify, UserMiddleware.checkRolePermissions]
       },
       {
         path: this.baseUrl,
         action: this.controller.remove,
-        method: "delete"
+        method: "delete",
+        middlewares: [JWTMiddleware.verify, UserMiddleware.checkRolePermissions]
       }
     ];
   }

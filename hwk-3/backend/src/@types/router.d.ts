@@ -4,6 +4,7 @@ export type RouterObj = {
   path: string;
   action: Function;
   method: string;
+  middlewares?: Array<any>;
 };
 
 export interface IRouter {

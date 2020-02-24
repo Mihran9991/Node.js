@@ -5,6 +5,7 @@ import UserModel, { IUser } from "../models/user.model";
 
 export default class UserRepository implements IRepository<IUser> {
   public create(user: IUser): Promise<IUser> {
+    console.log(user);
     return new UserModel(user).save();
   }
 
@@ -23,5 +24,9 @@ export default class UserRepository implements IRepository<IUser> {
 
   public getEmployeeList(): Query<any> {
     return UserModel.find();
+  }
+
+  public findByFields(fieldObj: Object): Query<any> {
+    return UserModel.findOne(fieldObj);
   }
 }

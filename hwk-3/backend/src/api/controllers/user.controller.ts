@@ -13,16 +13,10 @@ export default class UserController extends BaseController {
   public create = async (req: express.Request, res: express.Response) => {
     try {
       const { body: userData } = req;
-      const { role } = userData;
-
-      if (this.isEmployee(role)) {
-        return this.forbidden(res);
-      }
-
       const queryResponse = await this.userService.create(userData);
       return this.ok(res, queryResponse);
     } catch (e) {
-      this.clientError(res, e);
+      return this.fail(res, 400, e);
     }
   };
 
@@ -32,22 +26,17 @@ export default class UserController extends BaseController {
       const queryResponse = await this.userService.update(userData);
       return this.ok(res, queryResponse);
     } catch (e) {
-      this.clientError(res, e);
+      return this.fail(res, 400, e);
     }
   };
 
   public remove = async (req: express.Request, res: express.Response) => {
     try {
-      const { id, role } = req.body;
-
-      if (this.isEmployee(role)) {
-        return this.forbidden(res);
-      }
-
+      const { id } = req.body;
       const queryResponse = await this.userService.remove(id);
       return this.ok(res, queryResponse);
     } catch (e) {
-      this.clientError(res, e);
+      return this.fail(res, 400, e);
     }
   };
 
@@ -56,16 +45,10 @@ export default class UserController extends BaseController {
     res: express.Response
   ) => {
     try {
-      const { role } = req.body;
-
-      if (this.isEmployee(role)) {
-        return this.forbidden(res);
-      }
-
       const queryResponse = await this.userService.getEmployeeList();
       return this.ok(res, queryResponse);
     } catch (e) {
-      this.clientError(res, e);
+      return this.fail(res, 400, e);
     }
   };
 }
